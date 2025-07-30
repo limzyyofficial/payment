@@ -365,7 +365,7 @@ canvas {
 .qris-image-container {
     width: 100%;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 180, 255, 0.1);
     margin: 15px 0;
