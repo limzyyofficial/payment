@@ -130,10 +130,146 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment | Will Official</title>
+    <meta name="description" content="Premium Payment Gateway for secure transactions" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+            colors: {
+              dark: {
+                900: '#0a192f',
+                800: '#112240',
+                700: '#233554',
+              },
+              neon: {
+                cyan: '#64ffda',
+                blue: '#00b4ff',
+                purple: '#bd34fe',
+              }
+            },
+            animation: {
+              // --- Entrance Animations ---
+              'fade-in': 'fadeIn 1s ease-in-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'fade-in-down': 'fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'zoom-in': 'zoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+              'slide-in-right': 'slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-out-right': 'slideOutRight 0.5s ease-in forwards',
+              'bounce-in': 'bounceIn 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards',
+              'flip-in-x': 'flipInX 0.8s ease-out forwards',
+              'light-speed-in-right': 'lightSpeedInRight 1s ease-out forwards',
+              'blur-in': 'blurIn 1s ease-out forwards',
+              'tracking-in-expand': 'trackingInExpand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
+              'typewriter': 'typewriter 3s steps(40) forwards, blink 1s infinite',
+
+              // --- Infinite / Ambient Animations (Always Active) ---
+              'float': 'float 6s ease-in-out infinite',
+              'float-delayed': 'float 6s ease-in-out 3s infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glow-border': 'glowBorder 3s ease-in-out infinite',
+              'rotate-slow': 'rotate 15s linear infinite',
+              'cosmic-spin': 'cosmicSpin 20s linear infinite',
+              'shimmer': 'shimmer 2s linear infinite',
+              'blob-bounce': 'blobBounce 10s infinite ease-in-out',
+            },
+            keyframes: {
+              // Standard Entrances
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              fadeInUp: { '0%': { opacity: '0', transform: 'translateY(40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+              fadeInDown: { '0%': { opacity: '0', transform: 'translateY(-40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+              zoomIn: { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+              slideInRight: { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } },
+              slideOutRight: { '0%': { transform: 'translateX(0)', opacity: '1' }, '100%': { transform: 'translateX(100%)', opacity: '0' } },
+              
+              // Complex Entrances
+              bounceIn: { '0%, 20%, 40%, 60%, 80%, 100%': { transitionTimingFunction: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)' }, '0%': { opacity: '0', transform: 'scale3d(.3, .3, .3)' }, '20%': { transform: 'scale3d(1.1, 1.1, 1.1)' }, '40%': { transform: 'scale3d(.9, .9, .9)' }, '60%': { opacity: '1', transform: 'scale3d(1.03, 1.03, 1.03)' }, '80%': { transform: 'scale3d(.97, .97, .97)' }, '100%': { opacity: '1', transform: 'scale3d(1, 1, 1)' } },
+              flipInX: { '0%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)', animationTimingFunction: 'ease-in', opacity: '0' }, '40%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)', animationTimingFunction: 'ease-in' }, '60%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)', opacity: '1' }, '80%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)' }, '100%': { transform: 'perspective(400px)' } },
+              lightSpeedInRight: { '0%': { transform: 'translate3d(100%, 0, 0) skewX(-30deg)', opacity: '0' }, '60%': { transform: 'skewX(20deg)', opacity: '1' }, '80%': { transform: 'skewX(-5deg)' }, '100%': { transform: 'translate3d(0, 0, 0)' } },
+              blurIn: { '0%': { filter: 'blur(20px)', opacity: '0' }, '100%': { filter: 'blur(0)', opacity: '1' } },
+              
+              // Text Effects
+              trackingInExpand: { '0%': { letterSpacing: '-0.5em', opacity: '0' }, '40%': { opacity: '0.6' }, '100%': { opacity: '1' } },
+              typewriter: { '0%': { width: '0%' }, '100%': { width: '100%' } },
+              blink: { '50%': { borderColor: 'transparent' } },
+
+              // Infinite Ambient Effects
+              float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+              pulse: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.7' } },
+              rotate: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+              cosmicSpin: { '0%': { transform: 'rotate(0deg) scale(1)' }, '50%': { transform: 'rotate(180deg) scale(1.1)' }, '100%': { transform: 'rotate(360deg) scale(1)' } },
+              glowBorder: { '0%, 100%': { borderColor: 'rgba(100, 255, 218, 0.1)' }, '50%': { borderColor: 'rgba(100, 255, 218, 0.6)', boxShadow: '0 0 15px rgba(100, 255, 218, 0.2)' } },
+              blobBounce: {
+                '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '-1000px 0' },
+                '100%': { backgroundPosition: '1000px 0' }
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+      }
+      body {
+        background-color: #0a192f;
+        color: #e6f1ff;
+        overflow-x: hidden;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a192f;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #233554;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64ffda;
+      }
+      .perspective-1000 { perspective: 1000px; }
+      .perspective-500 { perspective: 500px; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
