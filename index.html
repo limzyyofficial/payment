@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payment | Will Official</title>
-    <meta name="description" content="Premium Payment Gateway for secure transactions" />
+    <meta name="description" content="Premium payment gateway for secure transactions" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -29,7 +29,6 @@
               }
             },
             animation: {
-              // --- Entrance Animations ---
               'fade-in': 'fadeIn 1s ease-in-out forwards',
               'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
               'fade-in-down': 'fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -42,8 +41,6 @@
               'blur-in': 'blurIn 1s ease-out forwards',
               'tracking-in-expand': 'trackingInExpand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
               'typewriter': 'typewriter 3s steps(40) forwards, blink 1s infinite',
-
-              // --- Infinite / Ambient Animations (Always Active) ---
               'float': 'float 6s ease-in-out infinite',
               'float-delayed': 'float 6s ease-in-out 3s infinite',
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -52,90 +49,306 @@
               'cosmic-spin': 'cosmicSpin 20s linear infinite',
               'shimmer': 'shimmer 2s linear infinite',
               'blob-bounce': 'blobBounce 10s infinite ease-in-out',
+              'rubber-band': 'rubberBand 1s ease both',
+              'head-shake': 'headShake 0.8s ease both',
+              'swing': 'swing 1s ease both',
+              'jello': 'jello 0.9s ease both',
+              'wobble': 'wobble 0.8s ease both',
+              'tada': 'tada 1s ease both',
             },
             keyframes: {
-              // Standard Entrances
               fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
               fadeInUp: { '0%': { opacity: '0', transform: 'translateY(40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
               fadeInDown: { '0%': { opacity: '0', transform: 'translateY(-40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
               zoomIn: { '0%': { opacity: '0', transform: 'scale(0.8)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
               slideInRight: { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' } },
               slideOutRight: { '0%': { transform: 'translateX(0)', opacity: '1' }, '100%': { transform: 'translateX(100%)', opacity: '0' } },
-              
-              // Complex Entrances
               bounceIn: { '0%, 20%, 40%, 60%, 80%, 100%': { transitionTimingFunction: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)' }, '0%': { opacity: '0', transform: 'scale3d(.3, .3, .3)' }, '20%': { transform: 'scale3d(1.1, 1.1, 1.1)' }, '40%': { transform: 'scale3d(.9, .9, .9)' }, '60%': { opacity: '1', transform: 'scale3d(1.03, 1.03, 1.03)' }, '80%': { transform: 'scale3d(.97, .97, .97)' }, '100%': { opacity: '1', transform: 'scale3d(1, 1, 1)' } },
               flipInX: { '0%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)', animationTimingFunction: 'ease-in', opacity: '0' }, '40%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)', animationTimingFunction: 'ease-in' }, '60%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)', opacity: '1' }, '80%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)' }, '100%': { transform: 'perspective(400px)' } },
               lightSpeedInRight: { '0%': { transform: 'translate3d(100%, 0, 0) skewX(-30deg)', opacity: '0' }, '60%': { transform: 'skewX(20deg)', opacity: '1' }, '80%': { transform: 'skewX(-5deg)' }, '100%': { transform: 'translate3d(0, 0, 0)' } },
               blurIn: { '0%': { filter: 'blur(20px)', opacity: '0' }, '100%': { filter: 'blur(0)', opacity: '1' } },
-              
-              // Text Effects
               trackingInExpand: { '0%': { letterSpacing: '-0.5em', opacity: '0' }, '40%': { opacity: '0.6' }, '100%': { opacity: '1' } },
               typewriter: { '0%': { width: '0%' }, '100%': { width: '100%' } },
               blink: { '50%': { borderColor: 'transparent' } },
-
-              // Infinite Ambient Effects
               float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
               pulse: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.7' } },
               rotate: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
               cosmicSpin: { '0%': { transform: 'rotate(0deg) scale(1)' }, '50%': { transform: 'rotate(180deg) scale(1.1)' }, '100%': { transform: 'rotate(360deg) scale(1)' } },
               glowBorder: { '0%, 100%': { borderColor: 'rgba(100, 255, 218, 0.1)' }, '50%': { borderColor: 'rgba(100, 255, 218, 0.6)', boxShadow: '0 0 15px rgba(100, 255, 218, 0.2)' } },
-              blobBounce: {
-                '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-              },
-              shimmer: {
-                '0%': { backgroundPosition: '-1000px 0' },
-                '100%': { backgroundPosition: '1000px 0' }
-              }
+              blobBounce: { '0%, 100%': { transform: 'translate(0, 0) scale(1)' }, '33%': { transform: 'translate(30px, -50px) scale(1.1)' }, '66%': { transform: 'translate(-20px, 20px) scale(0.9)' } },
+              shimmer: { '0%': { backgroundPosition: '-1000px 0' }, '100%': { backgroundPosition: '1000px 0' } },
+              rubberBand: { '0%': { transform: 'scale3d(1, 1, 1)' }, '30%': { transform: 'scale3d(1.25, 0.75, 1)' }, '40%': { transform: 'scale3d(0.75, 1.25, 1)' }, '50%': { transform: 'scale3d(1.15, 0.85, 1)' }, '65%': { transform: 'scale3d(.95, 1.05, 1)' }, '75%': { transform: 'scale3d(1.05, .95, 1)' }, '100%': { transform: 'scale3d(1, 1, 1)' } },
+              headShake: { '0%': { transform: 'translateX(0)' }, '6.5%': { transform: 'translateX(-6px) rotateY(-9deg)' }, '18.5%': { transform: 'translateX(5px) rotateY(7deg)' }, '31.5%': { transform: 'translateX(-3px) rotateY(-5deg)' }, '43.5%': { transform: 'translateX(2px) rotateY(3deg)' }, '50%': { transform: 'translateX(0)' } },
+              swing: { '20%': { transform: 'rotate(15deg)' }, '40%': { transform: 'rotate(-10deg)' }, '60%': { transform: 'rotate(5deg)' }, '80%': { transform: 'rotate(-5deg)' }, '100%': { transform: 'rotate(0deg)' } },
+              jello: { '0%, 11.1%, 100%': { transform: 'translateZ(0)' }, '22.2%': { transform: 'skewX(-12.5deg) skewY(-12.5deg)' }, '33.3%': { transform: 'skewX(6.25deg) skewY(6.25deg)' }, '44.4%': { transform: 'skewX(-3.125deg) skewY(-3.125deg)' }, '55.5%': { transform: 'skewX(1.5625deg) skewY(1.5625deg)' }, '66.6%': { transform: 'skewX(-0.78125deg) skewY(-0.78125deg)' }, '77.7%': { transform: 'skewX(0.390625deg) skewY(0.390625deg)' }, '88.8%': { transform: 'skewX(-0.1953125deg) skewY(-0.1953125deg)' } },
+              wobble: { '0%': { transform: 'translateX(0%)' }, '15%': { transform: 'translateX(-25%) rotate(-5deg)' }, '30%': { transform: 'translateX(20%) rotate(3deg)' }, '45%': { transform: 'translateX(-15%) rotate(-3deg)' }, '60%': { transform: 'translateX(10%) rotate(2deg)' }, '75%': { transform: 'translateX(-5%) rotate(-1deg)' }, '100%': { transform: 'translateX(0%)' } },
+              tada: { '0%': { transform: 'scale3d(1, 1, 1)' }, '10%, 20%': { transform: 'scale3d(.9, .9, .9) rotate(-3deg)' }, '30%, 50%, 70%, 90%': { transform: 'scale3d(1.1, 1.1, 1.1) rotate(3deg)' }, '40%, 60%, 80%': { transform: 'scale3d(1.1, 1.1, 1.1) rotate(-3deg)' }, '100%': { transform: 'scale3d(1, 1, 1)' } },
             }
           },
         },
       }
     </script>
-    <style>
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 5rem;
-      }
-      body {
-        background-color: #0a192f;
-        color: #e6f1ff;
-        overflow-x: hidden;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a192f;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #233554;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #64ffda;
-      }
-      .perspective-1000 { perspective: 1000px; }
-      .perspective-500 { perspective: 500px; }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "vite": "https://aistudiocdn.com/vite@^7.2.6",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+  </head>
+  <body class="relative min-h-screen w-full font-sans text-slate-200 antialiased selection:bg-neon-cyan/30 selection:text-white overflow-x-hidden">
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"></canvas>
+
+    <div id="toast-container" class="fixed top-6 right-6 z-[110] space-y-2"></div>
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-[60] transition-all duration-300 bg-transparent py-6">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="flex items-center justify-between">
+          <a href="#home" class="flex items-center gap-2 group relative z-50 cursor-pointer scroll-link">
+            <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-neon-cyan to-neon-blue text-dark-900 shadow-[0_0_15px_rgba(100,255,218,0.3)] transition-transform group-hover:rotate-12">
+              <i data-lucide="shield" class="h-6 w-6"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white">
+              Will <span class="text-neon-cyan">Official</span>
+            </span>
+          </a>
+
+          <div class="hidden md:flex items-center gap-8 relative z-50">
+            <a href="#home" class="text-sm font-medium text-slate-300 transition-colors hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(100,255,218,0.5)] cursor-pointer scroll-link">Home</a>
+            <a href="#features" class="text-sm font-medium text-slate-300 transition-colors hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(100,255,218,0.5)] cursor-pointer scroll-link">Features</a>
+            <a href="#payment-section" class="text-sm font-medium text-slate-300 transition-colors hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(100,255,218,0.5)] cursor-pointer scroll-link">Payments</a>
+            <a href="#support" class="text-sm font-medium text-slate-300 transition-colors hover:text-neon-cyan hover:drop-shadow-[0_0_8px_rgba(100,255,218,0.5)] cursor-pointer scroll-link">Support</a>
+            <a href="#payment-section" class="cursor-pointer rounded-full bg-white/5 border border-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-neon-cyan hover:text-dark-900 hover:border-neon-cyan hover:shadow-[0_0_20px_rgba(100,255,218,0.3)] active:scale-95 scroll-link">Pay Now</a>
+          </div>
+
+          <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-neon-cyan relative z-50 p-2" aria-expanded="false" aria-label="Toggle menu">
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 border-b border-white/10 bg-dark-900/95 backdrop-blur-xl p-4 shadow-2xl md:hidden z-40">
+          <div class="flex flex-col gap-4">
+            <a href="#home" class="block rounded-lg px-4 py-3 text-base font-medium text-slate-300 hover:bg-white/5 hover:text-neon-cyan cursor-pointer scroll-link">Home</a>
+            <a href="#features" class="block rounded-lg px-4 py-3 text-base font-medium text-slate-300 hover:bg-white/5 hover:text-neon-cyan cursor-pointer scroll-link">Features</a>
+            <a href="#payment-section" class="block rounded-lg px-4 py-3 text-base font-medium text-slate-300 hover:bg-white/5 hover:text-neon-cyan cursor-pointer scroll-link">Payments</a>
+            <a href="#support" class="block rounded-lg px-4 py-3 text-base font-medium text-slate-300 hover:bg-white/5 hover:text-neon-cyan cursor-pointer scroll-link">Support</a>
+            <a href="#payment-section" class="block text-center rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 px-4 py-3 text-base font-bold text-neon-cyan hover:bg-neon-cyan hover:text-dark-900 transition-all cursor-pointer scroll-link">Pay Now</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-20">
+      <section id="home" class="relative flex min-h-screen items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-20 left-10 h-72 w-72 rounded-full bg-neon-cyan/10 blur-[100px] animate-blob-bounce mix-blend-screen pointer-events-none"></div>
+        <div class="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-neon-blue/10 blur-[120px] animate-blob-bounce mix-blend-screen animation-delay-2000 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-neon-purple/5 blur-[100px] animate-pulse-slow pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 text-center z-10 perspective-500 space-y-6">
+          <div data-animate="animate-fade-in-down" class="relative">
+            <div class="inline-flex items-center gap-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 px-4 py-1.5 text-sm font-medium text-neon-cyan backdrop-blur-sm animate-float shadow-[0_0_15px_rgba(100,255,218,0.2)]">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-cyan opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-neon-cyan"></span>
+              </span>
+              System Operational &amp; Ready
+            </div>
+          </div>
+
+          <div data-animate="animate-zoom-in" data-delay="200">
+            <h1 class="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight text-white sm:text-7xl md:leading-tight animate-tracking-in-expand drop-shadow-2xl">
+              Secure Payments for <br />
+              <span class="relative inline-block mt-2">
+                <span class="absolute -inset-1 blur-md bg-gradient-to-r from-neon-cyan to-neon-blue opacity-20 animate-pulse"></span>
+                <span class="relative text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-blue drop-shadow-md">
+                  Digital Assets
+                </span>
+              </span>
+            </h1>
+          </div>
+
+          <div data-animate="animate-light-speed-in-right" data-delay="400">
+            <div class="mt-2 flex justify-center w-full">
+              <div class="relative w-fit mx-auto overflow-hidden border-r-2 border-neon-cyan whitespace-nowrap animate-typewriter text-lg md:text-xl text-slate-300 font-mono tracking-wide px-4 py-1 bg-dark-800/30 rounded-lg backdrop-blur-md">
+                Fast. Encrypted. No Reference Needed.
+              </div>
+            </div>
+          </div>
+
+          <div data-animate="animate-fade-in-up" data-delay="600">
+            <div class="mt-8 md:mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row">
+              <a href="#payment-section" class="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-neon-cyan px-10 py-4 text-lg font-bold text-dark-900 transition-all hover:shadow-[0_0_40px_rgba(100,255,218,0.6)] active:scale-95 animate-float-delayed cursor-pointer scroll-link">
+                <span class="relative z-10">Start Transaction</span>
+                <i data-lucide="chevron-right" class="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1"></i>
+                <div class="absolute inset-0 -z-0 translate-y-[100%] bg-white transition-transform duration-300 group-hover:translate-y-0"></div>
+              </a>
+
+              <a href="#features" class="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/30 hover:animate-pulse cursor-pointer scroll-link">
+                Learn More
+                <i data-lucide="arrow-down" class="h-4 w-4 transition-transform group-hover:translate-y-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dark-900 via-dark-900/80 to-transparent pointer-events-none"></div>
+      </section>
+
+      <div class="relative z-20 -mt-10">
+        <div class="container mx-auto px-4">
+          <div data-animate="animate-zoom-in" data-delay="800" class="grid grid-cols-2 gap-4 rounded-3xl border border-white/5 bg-dark-800/40 p-8 shadow-2xl backdrop-blur-xl md:grid-cols-4 lg:divide-x lg:divide-white/10" id="stats-grid"></div>
+        </div>
+      </div>
+
+      <section id="features" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+          <div data-animate="animate-fade-in-up" class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-white md:text-5xl animate-blur-in">Why Choose Us?</h2>
+            <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+              Experience the next generation of digital payments with features designed for speed and security.
+            </p>
+          </div>
+
+          <div id="features-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+        </div>
+      </section>
+
+      <section id="payment-section" class="py-24 relative">
+        <div class="container mx-auto max-w-5xl px-4 relative z-10">
+          <div data-animate="animate-fade-in-down" class="mb-16 text-center">
+            <span class="text-neon-cyan font-bold tracking-wider uppercase text-sm mb-2 block">Select Provider</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Payment Methods</h2>
+            <p class="text-slate-400 max-w-xl mx-auto">Choose your preferred transaction method below. All payments are processed securely.</p>
+          </div>
+
+          <div id="payment-grid" class="grid gap-6 grid-cols-2 lg:grid-cols-3 perspective-1000"></div>
+
+          <div data-animate="animate-flip-in-x" data-delay="800">
+            <div class="relative mt-12 overflow-hidden rounded-2xl border border-neon-cyan/20 bg-dark-800/60 p-6 md:p-8 backdrop-blur-md">
+              <div class="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-neon-cyan/10 blur-3xl"></div>
+
+              <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                  <i data-lucide="shield-check" class="w-6 h-6 text-neon-cyan"></i>
+                  <h2 class="text-xl font-bold text-white tracking-wide uppercase">Syarat &amp; Ketentuan</h2>
+                </div>
+
+                <ul id="terms-list" class="space-y-4"></ul>
+
+                <div class="mt-6 flex items-center gap-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 p-4 text-yellow-200/90">
+                  <i data-lucide="alert-triangle" class="w-5 h-5 shrink-0"></i>
+                  <p class="text-xs md:text-sm font-medium">Harap periksa kembali nominal transfer sebelum mengirim.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="support" class="py-20 relative">
+        <div class="container mx-auto px-4">
+          <div data-animate="animate-zoom-in">
+            <div class="rounded-3xl border border-neon-cyan/20 bg-gradient-to-br from-dark-800/90 to-dark-900/90 p-12 text-center backdrop-blur-xl shadow-[0_0_50px_rgba(0,180,255,0.1)]">
+              <h2 class="text-3xl font-bold text-white mb-6">Need Assistance?</h2>
+              <p class="text-slate-400 mb-8 max-w-2xl mx-auto">Our support team is available 24/7 to help you with any transaction issues or general inquiries.</p>
+
+              <div class="flex flex-col items-center justify-center gap-6 sm:flex-row">
+                <a id="support-link" href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 rounded-full bg-neon-cyan px-8 py-4 font-bold text-dark-900 shadow-[0_0_20px_rgba(100,255,218,0.3)] transition-all hover:-translate-y-1 hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] active:scale-95">
+                  <i data-lucide="message-circle" class="h-5 w-5 transition-transform group-hover:rotate-12"></i>
+                  Chat Support
+                </a>
+
+                <button id="audio-toggle" type="button" class="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 py-4 font-semibold text-white transition-all hover:bg-white/10 hover:border-white/30">
+                  <span class="flex items-center justify-center" data-audio-icon>
+                    <i data-lucide="volume-x" class="h-5 w-5 text-slate-400"></i>
+                  </span>
+                  <span data-audio-label>Play Sound</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative border-t border-white/10 bg-dark-900 pt-20 pb-10">
+      <div class="container mx-auto px-4">
+        <div class="grid gap-12 md:grid-cols-4 mb-16">
+          <div class="col-span-1 md:col-span-1">
+            <a href="#home" class="flex items-center gap-2 mb-6 scroll-link">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-neon-cyan to-neon-blue text-dark-900">
+                <i data-lucide="shield" class="h-5 w-5"></i>
+              </div>
+              <span class="text-lg font-bold text-white">
+                Will <span class="text-neon-cyan">Official</span>
+              </span>
+            </a>
+            <p class="text-slate-400 leading-relaxed text-sm">
+              Premium futuristic payment gateway solutions. Secure, fast, and reliable transactions for the digital era.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-6">Navigation</h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li><a href="#home" class="hover:text-neon-cyan transition-colors scroll-link">Home</a></li>
+              <li><a href="#features" class="hover:text-neon-cyan transition-colors scroll-link">Features</a></li>
+              <li><a href="#payment-section" class="hover:text-neon-cyan transition-colors scroll-link">Payments</a></li>
+              <li><a href="#support" class="hover:text-neon-cyan transition-colors scroll-link">Support</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-6">Legal</h4>
+            <ul class="space-y-4 text-sm text-slate-400">
+              <li><a href="#" class="hover:text-neon-cyan transition-colors">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-neon-cyan transition-colors">Terms of Service</a></li>
+              <li><a href="#" class="hover:text-neon-cyan transition-colors">Cookie Policy</a></li>
+              <li><a href="#" class="hover:text-neon-cyan transition-colors">Dispute Resolution</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-white mb-6">Connect</h4>
+            <div class="flex gap-4">
+              <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-400 hover:bg-neon-cyan hover:text-dark-900 transition-all hover:-translate-y-1">
+                <i data-lucide="github" class="h-5 w-5"></i>
+              </a>
+              <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-400 hover:bg-neon-blue hover:text-white transition-all hover:-translate-y-1">
+                <i data-lucide="twitter" class="h-5 w-5"></i>
+              </a>
+              <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-400 hover:bg-purple-500 hover:text-white transition-all hover:-translate-y-1">
+                <i data-lucide="instagram" class="h-5 w-5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>&copy; <span id="current-year"></span> Will Official. All rights reserved.</p>
+          <div class="flex gap-6">
+            <span>Server Status: <span class="text-emerald-400">Online</span></span>
+            <span>Version: 2.4.0</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="payment-modal" class="payment-modal fixed inset-0 hidden items-center justify-center p-4">
+      <div class="modal-overlay absolute inset-0 bg-dark-900/80 backdrop-blur-md transition-opacity"></div>
+
+      <div class="modal-content relative z-10 w-full max-w-md transform overflow-hidden rounded-2xl border border-neon-cyan/20 bg-dark-800/90 p-6 shadow-2xl backdrop-blur-xl">
+        <div class="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 overflow-hidden rounded-lg bg-white/95 p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]" id="modal-logo">
+              <img id="modal-icon" src="" alt="" class="h-full w-full object-contain" onerror="this.src='https://placehold.co/100x100?text=PAY'" />
+            </div>
+            <h3 id="modal-title" class="text-xl font-bold text-white"></h3>
+          </div>
+          <button id="modal-close" class="rounded-full p-1 text-slate-400 hover:bg-white/10 hover:text-white transition-all" aria-label="Close modal">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <div id="modal-body" class="space-y-6"></div>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
   </body>
 </html>
