@@ -9,7 +9,7 @@ const PAYMENT_METHODS = [
   {
     id: 'dana',
     name: 'DANA',
-    accountNumber: '0852-8001-905',
+    accountNumber: '0852-8001-9052',
     accountName: 'Priadi',
     iconUrl: 'https://raw.githubusercontent.com/LimzyyEzy/webimage/refs/heads/main/icon%20dana.png',
   },
