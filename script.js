@@ -40,7 +40,7 @@ const QRIS_DATA = {
   id: 'qris',
   name: 'QRIS',
   accountNumber: 'Scan QR Code Below',
-  iconUrl: 'https://raw.githubusercontent.com/LimzyyEzy/webimage/refs/heads/main/QRIS.png',
+  iconUrl: 'https://raw.githubusercontent.com/LimzyyEzy/webimage/refs/heads/main/qr_ID1026517728527_11.05.26_1778502192_1778502192495.jpeg',
   isQris: true,
 };
 
