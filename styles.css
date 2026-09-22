@@ -1,64 +1,284 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
+
+  --ink: #221f1a;
+  --ink-soft: #6b6455;
+  --ink-faint: #96907c;
+
+  --paper: #f3efe2;
+  --paper-deep: #e9e0c6;
+  --paper-panel: #fffdf6;
+
+  --line: #d9d0b3;
+  --line-strong: #c2b795;
+
+  --stamp: #b23a2a;
+  --stamp-dark: #8c2b1e;
+  --stamp-tint: rgba(178, 58, 42, 0.08);
+
+  --verified: #2f6f4e;
+  --verified-tint: rgba(47, 111, 78, 0.1);
+
+  --counter: #23201a;
+  --counter-2: #2d2a21;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background-color: #0a192f;
-  color: #e6f1ff;
+  background-color: var(--counter);
+  color: var(--ink);
   overflow-x: hidden;
 }
 
+::selection {
+  background: var(--stamp);
+  color: var(--paper-panel);
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a192f;
+  background: var(--counter);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #233554;
-  border-radius: 4px;
+  background: var(--line-strong);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64ffda;
+  background: var(--stamp);
 }
 
-.perspective-1000 {
-  perspective: 1000px;
+/* Counter surface: subtle dot texture behind the whole page */
+.counter-surface {
+  background-color: var(--counter);
+  background-image: radial-gradient(var(--counter-2) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.perspective-500 {
-  perspective: 500px;
+/* The paper column that everything sits on */
+.paper-column {
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--line), 0 24px 60px -30px rgba(0, 0, 0, 0.6);
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+/* Perforated tear line: dashed rule with two "punch holes" cut to the counter color */
+.tear-line {
+  position: relative;
+  border-top: 2px dashed var(--line-strong);
 }
 
-#toast-container {
-  pointer-events: none;
+.tear-line::before,
+.tear-line::after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--counter);
 }
 
-#toast-container > div {
-  pointer-events: auto;
+.tear-line::before {
+  left: -9px;
 }
 
-.payment-modal {
-  transition: opacity 0.3s ease;
+.tear-line::after {
+  right: -9px;
 }
 
-.payment-modal.hidden {
+.tear-line.on-paper::before,
+.tear-line.on-paper::after {
+  background: var(--paper);
+}
+
+/* Ticket stub card used for payment methods */
+.stub-card {
+  position: relative;
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  border-left: 3px dashed var(--line-strong);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.stub-card:hover,
+.stub-card:focus-visible {
+  border-color: var(--stamp);
+  background: var(--stamp-tint);
+}
+
+/* Barcode strip made from repeating bars, used once in the hero ticket */
+.barcode {
+  height: 34px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0px,
+    var(--ink) 2px,
+    transparent 2px,
+    transparent 5px,
+    var(--ink) 5px,
+    var(--ink) 6px,
+    transparent 6px,
+    transparent 10px,
+    var(--ink) 10px,
+    var(--ink) 13px,
+    transparent 13px,
+    transparent 16px
+  );
+  opacity: 0.85;
+}
+
+/* Rubber-stamp badge, tilted like a real ink stamp */
+.stamp-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--stamp);
+  color: var(--stamp);
+  transform: rotate(-3deg);
+}
+
+/* One deliberate load-in moment for the hero ticket only */
+@keyframes ticketPrintIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stampThud {
+  0% {
+    opacity: 0;
+    transform: rotate(-3deg) scale(1.4);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-3deg) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-3deg) scale(1);
+  }
+}
+
+.animate-print-in {
+  animation: ticketPrintIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-stamp-in {
+  animation: stampThud 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.35s;
+}
+
+/* Quiet one-time reveal for sections as they enter view (no repeated hide/show) */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-print-in,
+  .animate-stamp-in,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Toast: a small torn ticket corner, not a glassy pill */
+.toast-slip {
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--verified);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.45);
+}
+
+.toast-slip.is-error {
+  border-left-color: var(--stamp);
+}
+
+@keyframes slipIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slipOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+.animate-slip-in {
+  animation: slipIn 0.25s ease-out forwards;
+}
+
+.animate-slip-out {
+  animation: slipOut 0.25s ease-in forwards;
+}
+
+/* Modal: ticket stub sliding down as if printing out */
+.ticket-modal {
+  transition: opacity 0.2s ease;
+}
+
+.ticket-modal.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.payment-modal.flex {
+.ticket-modal.flex {
   display: flex;
+}
+
+@keyframes modalPrint {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-modal-print {
+  animation: modalPrint 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.font-mono-ticket {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
 }

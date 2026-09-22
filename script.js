@@ -56,19 +56,19 @@ const TERMS = [
 ];
 
 const STATS = [
-  { label: 'Active Users', value: '10K+' },
-  { label: 'Success Rate', value: '99.9%' },
-  { label: 'Processing Time', value: '< 1 Min' },
-  { label: 'Support', value: '24/7' },
+  { label: 'Pengguna Aktif', value: '10K+' },
+  { label: 'Tingkat Berhasil', value: '99.9%' },
+  { label: 'Waktu Proses', value: '< 1 Menit' },
+  { label: 'Dukungan', value: '24/7' },
 ];
 
 const FEATURES = [
-  { icon: 'zap', color: 'text-neon-cyan', title: 'Instant Processing', desc: 'Transactions are processed automatically within seconds.' },
-  { icon: 'shield-check', color: 'text-neon-blue', title: 'Secure Gateway', desc: 'End-to-end encryption ensures your data remains private.' },
-  { icon: 'clock-3', color: 'text-purple-400', title: '24/7 Availability', desc: 'Our automated systems work round the clock, anytime.' },
-  { icon: 'globe', color: 'text-emerald-400', title: 'Universal Access', desc: 'Accessible from any device, anywhere in the world.' },
-  { icon: 'smartphone', color: 'text-yellow-400', title: 'Mobile First', desc: 'Optimized interface for seamless mobile experience.' },
-  { icon: 'lock', color: 'text-red-400', title: 'Anti-Fraud', desc: 'Advanced detection systems to prevent unauthorized access.' },
+  { icon: 'zap', title: 'Diproses Otomatis', desc: 'Verifikasi dan pemrosesan berjalan cepat begitu bukti transfer masuk.' },
+  { icon: 'shield-check', title: 'Jalur Aman', desc: 'Data dan nomor transaksi Anda tidak dibagikan ke pihak lain.' },
+  { icon: 'clock-3', title: 'Buka Setiap Saat', desc: 'Loket ini beroperasi 24 jam, kapan pun Anda perlu bertransaksi.' },
+  { icon: 'smartphone', title: 'Dari HP Mana Pun', desc: 'Tidak perlu aplikasi tambahan, cukup buka dari browser ponsel.' },
+  { icon: 'search-check', title: 'Riwayat Jelas', desc: 'Setiap transaksi punya nomor tiket agar mudah ditelusuri.' },
+  { icon: 'lock', title: 'Anti Duplikat', desc: 'Sistem menandai transaksi ganda sebelum diverifikasi admin.' },
 ];
 
 const AUDIO_URL = 'https://cdn.pixabay.com/audio/2022/01/18/audio_d0a13f69d2.mp3';
@@ -78,8 +78,7 @@ let toastTimer;
 let audio;
 let isPlaying = false;
 
-const navScrolledClasses = ['bg-dark-900/90', 'backdrop-blur-lg', 'border-b', 'border-white/5', 'py-4', 'shadow-xl'];
-const navDefaultClasses = ['bg-transparent', 'py-6'];
+const navScrolledClasses = ['shadow-sm'];
 
 document.addEventListener('DOMContentLoaded', () => {
   setSupportLink();
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupModal();
   setupRevealOnScroll();
   setupAudio();
-  setupParticles();
   refreshIcons();
 });
 
@@ -116,10 +114,10 @@ function populateStats() {
   grid.innerHTML = '';
   STATS.forEach((stat) => {
     const item = document.createElement('div');
-    item.className = 'flex flex-col items-center justify-center p-2 text-center';
+    item.className = 'border-line flex flex-col items-center justify-center p-5 text-center';
     item.innerHTML = `
-      <span class="text-3xl font-extrabold text-white md:text-4xl drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">${stat.value}</span>
-      <span class="mt-1 text-sm font-medium text-slate-400 uppercase tracking-wider">${stat.label}</span>
+      <span class="font-mono-ticket text-2xl font-bold text-ink md:text-3xl">${stat.value}</span>
+      <span class="mt-1 text-xs font-medium text-ink-faint uppercase tracking-wide">${stat.label}</span>
     `;
     grid.appendChild(item);
   });
@@ -129,17 +127,13 @@ function populateFeatures() {
   const grid = document.getElementById('features-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  FEATURES.forEach((feature, index) => {
+  FEATURES.forEach((feature) => {
     const card = document.createElement('div');
-    card.className = 'group h-full rounded-2xl border border-white/5 bg-white/5 p-8 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/10 hover:-translate-y-2 hover:animate-head-shake';
-    card.dataset.animate = 'animate-fade-in-up';
-    card.dataset.delay = String(index * 100);
+    card.className = 'reveal border border-line bg-paper-panel p-6 transition-colors hover:border-stamp';
     card.innerHTML = `
-      <div class="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-dark-900 border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:animate-swing">
-        <i data-lucide="${feature.icon}" class="h-6 w-6 ${feature.color}"></i>
-      </div>
-      <h3 class="mb-3 text-xl font-bold text-white group-hover:text-neon-cyan transition-colors">${feature.title}</h3>
-      <p class="text-slate-400 leading-relaxed">${feature.desc}</p>
+      <i data-lucide="${feature.icon}" class="h-5 w-5 text-stamp"></i>
+      <h3 class="mt-4 text-base font-bold text-ink">${feature.title}</h3>
+      <p class="mt-2 text-sm text-ink-soft leading-relaxed">${feature.desc}</p>
     `;
     grid.appendChild(card);
   });
@@ -148,16 +142,15 @@ function populateFeatures() {
 function createPaymentCard(method) {
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'group relative flex flex-col items-center justify-center gap-4 w-full overflow-hidden rounded-2xl border border-neon-cyan/10 bg-dark-800/40 p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:bg-dark-700/60 hover:shadow-[0_15px_30px_-5px_rgba(100,255,218,0.2)] active:scale-95 text-center cursor-pointer perspective-1000 animate-glow-border';
+  button.className = 'stub-card group flex items-center gap-4 w-full p-4 text-left cursor-pointer';
   button.innerHTML = `
-    <div class="absolute inset-0 bg-gradient-to-br from-neon-cyan/0 via-neon-cyan/0 to-neon-cyan/0 opacity-0 transition-all duration-700 group-hover:from-neon-cyan/5 group-hover:to-neon-blue/10 group-hover:opacity-100 transform scale-150 group-hover:scale-100"></div>
-    <div class="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-2xl bg-white/95 p-2 shadow-lg transition-all duration-500 ease-in-out group-hover:animate-rubber-band group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] animate-float">
+    <div class="h-12 w-12 flex-shrink-0 overflow-hidden border border-line bg-white p-1.5">
       <img src="${method.iconUrl}" alt="${method.name}" class="h-full w-full object-contain" onerror="this.src='https://placehold.co/100x100?text=PAY'" />
     </div>
-    <div class="relative z-10 flex items-center justify-center gap-2 transform transition-all duration-300 group-hover:translate-x-1">
-      <h3 class="text-xl font-bold text-white tracking-wide transition-colors group-hover:text-neon-cyan group-hover:drop-shadow-[0_0_8px_rgba(100,255,218,0.5)]">${method.name}</h3>
-      <i data-lucide="chevron-right" class="w-5 h-5 text-slate-500 opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-neon-cyan animate-pulse"></i>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-mono-ticket text-sm font-bold text-ink tracking-wide truncate">${method.name}</h3>
     </div>
+    <i data-lucide="chevron-right" class="w-4 h-4 text-ink-faint transition-transform group-hover:translate-x-1 group-hover:text-stamp"></i>
   `;
   button.addEventListener('click', () => openModal(method));
   return button;
@@ -167,10 +160,8 @@ function populatePayments() {
   const grid = document.getElementById('payment-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  [...PAYMENT_METHODS, QRIS_DATA].forEach((method, index) => {
+  [...PAYMENT_METHODS, QRIS_DATA].forEach((method) => {
     const card = createPaymentCard(method);
-    card.dataset.animate = 'animate-fade-in-up';
-    card.dataset.delay = String(index * 150);
     grid.appendChild(card);
   });
 }
@@ -181,10 +172,10 @@ function populateTerms() {
   list.innerHTML = '';
   TERMS.forEach((term, index) => {
     const item = document.createElement('li');
-    item.className = 'flex items-start gap-3 text-slate-300';
+    item.className = 'flex items-start gap-3';
     item.innerHTML = `
-      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neon-cyan/10 text-xs font-bold text-neon-cyan">${index + 1}</span>
-      <p class="text-sm md:text-base leading-relaxed">${term}</p>
+      <span class="font-mono-ticket flex h-6 w-6 shrink-0 items-center justify-center border border-stamp/40 text-xs font-bold text-stamp">${String(index + 1).padStart(2, '0')}</span>
+      <p class="text-sm md:text-base leading-relaxed text-ink-soft">${term}</p>
     `;
     list.appendChild(item);
   });
@@ -197,10 +188,8 @@ function setupNavbar() {
   const setNavStyles = () => {
     if (window.scrollY > 20) {
       navbar.classList.add(...navScrolledClasses);
-      navbar.classList.remove(...navDefaultClasses);
     } else {
       navbar.classList.remove(...navScrolledClasses);
-      navbar.classList.add(...navDefaultClasses);
     }
   };
 
@@ -282,9 +271,9 @@ function openModal(method) {
   modal.classList.add('flex');
   const content = modal.querySelector('.modal-content');
   if (content) {
-    content.classList.remove('animate-bounce-in');
+    content.classList.remove('animate-modal-print');
     void content.getClientRects();
-    content.classList.add('animate-bounce-in');
+    content.classList.add('animate-modal-print');
   }
   refreshIcons();
 }
@@ -295,35 +284,33 @@ function renderModalBody(method) {
 
   if (method.isQris) {
     body.innerHTML = `
-      <div class="space-y-6 animate-fade-in-up" style="animation-delay:300ms">
-        <div class="rounded-xl overflow-hidden border border-white/10 bg-white p-3 transform transition-transform hover:scale-105 duration-300">
-          <img src="${method.iconUrl}" alt="QRIS Code" class="w-full h-auto rounded-lg" onerror="this.src='https://placehold.co/300x300?text=QRIS'" />
+      <div class="space-y-5">
+        <div class="border border-line bg-white p-3">
+          <img src="${method.iconUrl}" alt="QRIS Code" class="w-full h-auto" onerror="this.src='https://placehold.co/300x300?text=QRIS'" />
         </div>
-        <p class="text-center text-sm text-slate-400">Scan QR code using your preferred payment app</p>
-        <div class="flex justify-center">
-          <a href="${method.iconUrl}" download="QRIS_${method.name}.png" target="_blank" rel="noreferrer" class="flex w-full items-center justify-center gap-2 rounded-xl border border-neon-cyan/20 bg-neon-cyan/10 px-4 py-3 text-sm font-semibold text-neon-cyan transition-all hover:bg-neon-cyan/20 hover:border-neon-cyan/40 hover:shadow-lg hover:shadow-neon-cyan/10 hover:-translate-y-1 hover:animate-pulse">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            Download QR Image
-          </a>
-        </div>
+        <p class="text-center text-sm text-ink-soft">Scan kode QR menggunakan aplikasi e-wallet favorit Anda</p>
+        <a href="${method.iconUrl}" download="QRIS_${method.name}.png" target="_blank" rel="noreferrer" class="flex w-full items-center justify-center gap-2 border-2 border-ink px-4 py-3 text-sm font-bold text-ink transition-colors hover:border-stamp hover:text-stamp">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          Unduh Gambar QR
+        </a>
       </div>
     `;
   } else {
     body.innerHTML = `
-      <div class="space-y-6 animate-fade-in-up" style="animation-delay:300ms">
-        <div class="rounded-xl bg-dark-900/50 p-6 text-center border border-white/5 hover:border-neon-cyan/30 transition-colors duration-500 hover:animate-pulse-slow">
-          <p class="text-sm text-slate-400 mb-2">Account Number</p>
-          <p class="font-mono text-2xl font-bold text-neon-cyan tracking-wider break-all mb-4 drop-shadow-[0_0_10px_rgba(100,255,218,0.3)]">${method.accountNumber}</p>
-          ${method.accountName ? `<div class="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10"><p class="text-sm text-slate-300 font-medium">A/N ${method.accountName}</p></div>` : ''}
+      <div class="space-y-5">
+        <div class="border border-dashed border-line p-5 text-center">
+          <p class="text-xs uppercase tracking-wide text-ink-faint mb-2">Nomor Tujuan</p>
+          <p class="font-mono-ticket text-xl font-bold text-ink tracking-wider break-all mb-3">${method.accountNumber}</p>
+          ${method.accountName ? `<div class="inline-block px-3 py-1 border border-line"><p class="text-sm text-ink-soft font-medium">a.n ${method.accountName}</p></div>` : ''}
         </div>
         <div class="flex items-center justify-center gap-2">
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-400 uppercase tracking-wider animate-pulse">
-            <i data-lucide="check-circle" class="w-3 h-3"></i> System Ready
+          <span class="inline-flex items-center gap-1.5 border border-verified/30 bg-verified/10 px-3 py-1 text-xs font-bold text-verified">
+            <i data-lucide="check-circle" class="w-3 h-3"></i> Siap Menerima
           </span>
         </div>
-        <button data-copy-number class="group flex w-full items-center justify-center gap-2 rounded-xl border border-neon-cyan/20 bg-neon-cyan px-4 py-3 text-sm font-bold text-dark-900 uppercase tracking-widest transition-all hover:bg-neon-cyan/90 hover:shadow-[0_0_20px_rgba(100,255,218,0.4)] hover:-translate-y-1 active:scale-95 active:translate-y-1 hover:animate-tada">
-          <i data-lucide="copy" class="w-4 h-4 transition-transform group-hover:rotate-12 group-hover:scale-110"></i>
-          Copy Number
+        <button data-copy-number class="flex w-full items-center justify-center gap-2 bg-ink px-4 py-3 text-sm font-bold text-paper-panel transition-colors hover:bg-stamp">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          Salin Nomor
         </button>
       </div>
     `;
@@ -342,15 +329,15 @@ function closeModal() {
 }
 
 function copyNumber(text) {
-  const cleanText = text.replace(/-/g, '').replace(/\\s/g, '');
+  const cleanText = text.replace(/-/g, '').replace(/\s/g, '');
   if (!navigator.clipboard) {
-    showToast('Clipboard not available', 'error');
+    showToast('Clipboard tidak tersedia', 'error');
     return;
   }
   navigator.clipboard
     .writeText(cleanText)
-    .then(() => showToast('Number copied successfully!', 'success'))
-    .catch(() => showToast('Failed to copy', 'error'));
+    .then(() => showToast('Nomor berhasil disalin!', 'success'))
+    .catch(() => showToast('Gagal menyalin', 'error'));
 }
 
 function showToast(message, type = 'success') {
@@ -359,14 +346,10 @@ function showToast(message, type = 'success') {
 
   container.innerHTML = '';
   const toast = document.createElement('div');
-  toast.className = `flex items-center gap-3 px-6 py-4 rounded-xl shadow-2xl backdrop-blur-md border border-white/10 transition-all duration-300 ${
-    type === 'success'
-      ? 'bg-emerald-900/80 text-emerald-100 border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.2)]'
-      : 'bg-red-900/80 text-red-100 border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.2)]'
-  } animate-slide-in-right`;
+  toast.className = `toast-slip flex items-center gap-3 px-5 py-4 animate-slip-in ${type === 'error' ? 'is-error' : ''}`;
   toast.innerHTML = `
-    <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5 ${type === 'success' ? 'text-emerald-400' : 'text-red-400'}"></i>
-    <span class="font-medium tracking-wide">${message}</span>
+    <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5 ${type === 'success' ? 'text-verified' : 'text-stamp'}"></i>
+    <span class="text-sm font-medium text-ink">${message}</span>
   `;
 
   container.appendChild(toast);
@@ -374,42 +357,29 @@ function showToast(message, type = 'success') {
 
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
-    toast.classList.remove('animate-slide-in-right');
-    toast.classList.add('animate-slide-out-right');
-    setTimeout(() => toast.remove(), 500);
+    toast.classList.remove('animate-slip-in');
+    toast.classList.add('animate-slip-out');
+    setTimeout(() => toast.remove(), 250);
   }, 3000);
 }
 
 function setupRevealOnScroll() {
-  const elements = document.querySelectorAll('[data-animate]');
+  const elements = document.querySelectorAll('.reveal');
   if (!elements.length) return;
 
-  elements.forEach((el) => {
-    const animation = el.dataset.animate || 'animate-fade-in-up';
-    const delay = Number(el.dataset.delay || 0);
-    const threshold = Number(el.dataset.threshold || 0.15);
-
-    el.style.opacity = '0';
-    el.style.visibility = 'hidden';
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          el.style.animationDelay = `${delay}ms`;
-          el.style.opacity = '1';
-          el.style.visibility = 'visible';
-          el.classList.add(animation);
-        } else {
-          el.style.opacity = '0';
-          el.style.visibility = 'hidden';
-          el.classList.remove(animation);
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         }
-      },
-      { threshold, rootMargin: '0px 0px -50px 0px' }
-    );
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
 
-    observer.observe(el);
-  });
+  elements.forEach((el) => observer.observe(el));
 }
 
 function setupAudio() {
@@ -420,41 +390,26 @@ function setupAudio() {
   audio.loop = true;
   audio.volume = 0.5;
 
-  const tryPlay = () => {
-    audio
-      .play()
-      .then(() => {
-        isPlaying = true;
-        updateAudioButton();
-      })
-      .catch(() => {
-        isPlaying = false;
-        updateAudioButton();
-      });
-  };
-
   button.addEventListener('click', () => {
     if (!audio) return;
     if (isPlaying) {
       audio.pause();
       isPlaying = false;
-      showToast('Music Paused', 'success');
+      showToast('Musik dijeda', 'success');
     } else {
       audio
         .play()
         .then(() => {
           isPlaying = true;
-          showToast('Music Playing', 'success');
+          showToast('Musik diputar', 'success');
         })
         .catch(() => {
           isPlaying = false;
-          showToast('Failed to play audio', 'error');
+          showToast('Gagal memutar audio', 'error');
         });
     }
     updateAudioButton();
   });
-
-  tryPlay();
 }
 
 function updateAudioButton() {
@@ -463,114 +418,10 @@ function updateAudioButton() {
   if (!iconHolder || !label) return;
 
   const iconName = isPlaying ? 'volume-2' : 'volume-x';
-  const iconColor = isPlaying ? 'text-neon-cyan animate-pulse' : 'text-slate-400';
-  iconHolder.innerHTML = `<i data-lucide="${iconName}" class="h-5 w-5 ${iconColor}"></i>`;
-  label.textContent = isPlaying ? 'Mute Sound' : 'Play Sound';
+  const iconColor = isPlaying ? 'text-stamp' : 'text-ink-faint';
+  iconHolder.innerHTML = `<i data-lucide="${iconName}" class="h-4 w-4 ${iconColor}"></i>`;
+  label.textContent = isPlaying ? 'Matikan Musik' : 'Putar Musik';
   refreshIcons();
-}
-
-function setupParticles() {
-  const canvas = document.getElementById('particle-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  let particles = [];
-  let animationId;
-  const mouse = { x: -1000, y: -1000, radius: 150 };
-
-  const init = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    particles = [];
-
-    const particleCount = Math.min(100, (canvas.width * canvas.height) / 15000);
-
-    for (let i = 0; i < particleCount; i += 1) {
-      const radius = Math.random() * 2 + 1;
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius,
-        baseRadius: radius,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5,
-        density: Math.random() * 30 + 1,
-        color: `rgba(100, 255, 218, ${Math.random() * 0.5 + 0.1})`,
-      });
-    }
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach((p, index) => {
-      p.x += p.dx;
-      p.y += p.dy;
-
-      if (p.x < 0 || p.x > canvas.width) p.dx = -p.dx;
-      if (p.y < 0 || p.y > canvas.height) p.dy = -p.dy;
-
-      const dx = mouse.x - p.x;
-      const dy = mouse.y - p.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < mouse.radius) {
-        const forceDirectionX = dx / distance;
-        const forceDirectionY = dy / distance;
-        const force = (mouse.radius - distance) / mouse.radius;
-        const directionX = forceDirectionX * force * p.density * 0.6;
-        const directionY = forceDirectionY * force * p.density * 0.6;
-
-        p.x -= directionX;
-        p.y -= directionY;
-        p.radius = p.baseRadius * 1.5;
-      } else {
-        p.radius = p.baseRadius;
-      }
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.fill();
-
-      for (let j = index; j < particles.length; j += 1) {
-        const p2 = particles[j];
-        const dx2 = p.x - p2.x;
-        const dy2 = p.y - p2.y;
-        const dist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-
-        if (dist < 100) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(100, 255, 218, ${0.15 * (1 - dist / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    });
-
-    animationId = requestAnimationFrame(draw);
-  };
-
-  const handleResize = () => init();
-  const handleMouseMove = (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-  };
-
-  window.addEventListener('resize', handleResize);
-  window.addEventListener('mousemove', handleMouseMove);
-
-  init();
-  draw();
-
-  return () => {
-    window.removeEventListener('resize', handleResize);
-    window.removeEventListener('mousemove', handleMouseMove);
-    cancelAnimationFrame(animationId);
-  };
 }
 
 function setFooterYear() {

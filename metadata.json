@@ -1,5 +1,5 @@
 {
   "name": "Will Official Payment",
-  "description": "A premium, futuristic payment gateway portal featuring glassmorphism design, particle effects, and secure payment method display.",
+  "description": "A ticket-counter styled payment portal for manual e-wallet and QRIS transfers, with a paper-and-ink receipt aesthetic.",
   "requestFramePermissions": []
 }
